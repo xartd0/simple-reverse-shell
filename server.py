@@ -7,6 +7,7 @@ def exit():
     print(f"» Listen to the {HOST_CLIENT}:{PORT}")
     Listener()
 
+    
 def Listener():
     socks, client = s.accept()
     print("\n»  ┏   The new bot is connected to the server!  ┓")
