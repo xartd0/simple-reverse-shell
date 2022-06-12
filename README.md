@@ -1,8 +1,8 @@
 # simple-reverse-shell
 undetectable reverse shell on python by xartd0
 
+![изображение](https://user-images.githubusercontent.com/43171120/173245317-d74324fe-aaf4-49ea-9878-d61226893cae.png)
 
-![изображение](https://user-images.githubusercontent.com/43171120/173243878-99e4f632-1a9f-4eff-b1c2-82af92b1d938.png)
 
 ## Features
 - Make the file hidden
