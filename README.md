@@ -12,3 +12,4 @@ undetectable reverse shell on python by xartd0
 - Open links
 - Proccesses of client
 - Kill proccess by PID
+- Stable client (reconnect after any fall)
