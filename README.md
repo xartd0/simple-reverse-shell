@@ -10,3 +10,5 @@ undetectable reverse shell on python by xartd0
 - Send an error message
 - Information about client ip
 - Open links
+- Proccesses of client
+- Kill proccess by PID
