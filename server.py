@@ -1,4 +1,3 @@
-from tkinter import S
 from imports import *
 
 s = socket.socket()
