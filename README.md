@@ -14,3 +14,5 @@ undetectable reverse shell on python by xartd0
 - Kill proccess by PID
 - Stable client (reconnect after any fall)
 - Change client wallpaper from url
+- Remove file from system
+- Add client to startup
