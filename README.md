@@ -2,7 +2,7 @@
 undetectable reverse shell on python by xartd0
 
 
-![изображение](https://user-images.githubusercontent.com/43171120/173208660-3c1f9326-2041-4549-beee-4f6d406cc9ef.png)
+![изображение](https://user-images.githubusercontent.com/43171120/173243878-99e4f632-1a9f-4eff-b1c2-82af92b1d938.png)
 
 ## Features
 - Make the file hidden
